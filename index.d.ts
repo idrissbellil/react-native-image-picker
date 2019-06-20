@@ -1,6 +1,6 @@
 declare module "react-native-image-picker" {
 
-    interface ImagePickerResponse {
+    interface Response {
         customButton: string;
         didCancel: boolean;
         error: string;
@@ -19,17 +19,17 @@ declare module "react-native-image-picker" {
         timestamp?: string;
     }
 
-    interface ImagePickerCustomButtonOptions {
+    interface CustomButtonOptions {
         name?: string;
         title?: string;
     }
 
-    interface ImagePickerOptions {
+    interface Options {
         title?: string;
         cancelButtonTitle?: string;
         takePhotoButtonTitle?: string;
         chooseFromLibraryButtonTitle?: string;
-        customButtons?: Array<ImagePickerCustomButtonOptions>;
+        customButtons?: Array<CustomButtonOptions>;
         cameraType?: 'front' | 'back';
         mediaType?: 'photo' | 'video' | 'mixed';
         maxWidth?: number;
@@ -40,10 +40,10 @@ declare module "react-native-image-picker" {
         rotation?: number;
         allowsEditing?: boolean;
         noData?: boolean;
-        storageOptions?: ImagePickerStorageOptions;
+        storageOptions?: StorageOptions;
     }
 
-    interface ImagePickerStorageOptions {
+    interface StorageOptions {
         skipBackup?: boolean;
         path?: string;
         cameraRoll?: boolean;
@@ -51,10 +51,12 @@ declare module "react-native-image-picker" {
     }
 
 
-    export default class ImagePicker {
-        static showImagePicker(options: ImagePickerOptions, callback: (response: ImagePickerResponse) => void): void;
-        static launchCamera(options: ImagePickerOptions, callback: (response: ImagePickerResponse) => void): void;
-        static launchImageLibrary(options: ImagePickerOptions, callback: (response: ImagePickerResponse) => void): void;
+    class ImagePicker {
+        static showImagePicker(options: Options, callback: (response: Response) => void): void;
+        static launchCamera(options: Options, callback: (response: Response) => void): void;
+        static launchImageLibrary(options: Options, callback: (response: Response) => void): void;
     }
+
+    export = ImagePicker;
 
 }

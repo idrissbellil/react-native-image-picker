@@ -1,8 +1,9 @@
 package com.imagepicker.media;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.webkit.MimeTypeMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableMap;
 
@@ -14,7 +15,8 @@ import java.io.File;
 
 public class ImageConfig
 {
-    public @Nullable final File original;
+    public @Nullable
+    final File original;
     public @Nullable final File resized;
     public final int maxWidth;
     public final int maxHeight;
@@ -39,7 +41,8 @@ public class ImageConfig
         this.saveToCameraRoll = saveToCameraRoll;
     }
 
-    public @NonNull ImageConfig withMaxWidth(final int maxWidth)
+    public @NonNull
+    ImageConfig withMaxWidth(final int maxWidth)
     {
         return new ImageConfig(
                 this.original, this.resized, maxWidth,
@@ -78,13 +81,11 @@ public class ImageConfig
 
     public @NonNull ImageConfig withOriginalFile(@Nullable final File original)
     {
-        if (original != null) {
-            //if it is a GIF file, always set quality to 100 to prevent compression
-            String extension = MimeTypeMap.getFileExtensionFromUrl(original.getAbsolutePath());
-            int quality = this.quality;
-            if(extension.contains("gif")){
-                quality = 100;
-            }
+        //if it is a GIF file, always set quality to 100 to prevent compression
+        String extension = MimeTypeMap.getFileExtensionFromUrl(original.getAbsolutePath());
+        int quality = this.quality;
+        if(extension.contains("gif")){
+            quality = 100;
         }
 
         return new ImageConfig(
